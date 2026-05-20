@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "Batimetri 2023",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "OBJECTID": 1, "id": 1, "Luas": 1234.46775867, "Shape_Leng": 146264.30184900001, "Shape_Area": 1234467758.73, "THN": 2023 }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 110.099455052020133, -5.677198344518463 ], [ 110.52105367146072, -5.6774451955983 ], [ 110.521076813532261, -5.916412535880499 ], [ 110.099165772989167, -5.916501247888064 ], [ 110.099455052020133, -5.677198344518463 ] ] ] ] } }
+]
+}
