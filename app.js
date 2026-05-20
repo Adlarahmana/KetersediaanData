@@ -5,6 +5,7 @@ const osm = new ol.layer.Tile({
   source: new ol.source.OSM()
 });
 
+
 /* ===============================
    HELPER VECTOR LAYER
 ================================ */
@@ -29,8 +30,17 @@ function createVectorLayer(url, strokeColor, fillColor, layerName, layerCategory
   layer.set('name', layerName);
   layer.set('category', layerCategory);
 
+  layer.getSource().on('featuresloadend', function () {
+    console.log(layerName + ' loaded:', layer.getSource().getFeatures().length);
+  });
+
+  layer.getSource().on('featuresloaderror', function () {
+    console.error(layerName + ' gagal dimuat. Cek path/nama file:', url);
+  });
+
   return layer;
 }
+
 
 /* ===============================
    HELPER LINE LAYER
@@ -55,15 +65,24 @@ function createLineLayer(url, strokeColor, layerName, layerCategory) {
   layer.set('name', layerName);
   layer.set('category', layerCategory);
 
+  layer.getSource().on('featuresloadend', function () {
+    console.log(layerName + ' loaded:', layer.getSource().getFeatures().length);
+  });
+
+  layer.getSource().on('featuresloaderror', function () {
+    console.error(layerName + ' gagal dimuat. Cek path/nama file:', url);
+  });
+
   return layer;
 }
+
 
 /* ===============================
    LPI LAYERS
 ================================ */
 const lpiLayers = {
   10: createVectorLayer(
-    'Data/GeoJson/LPI_10K.geojson',
+    'GeoJson/LPI_10K.geojson',
     '#004c99',
     'rgba(0, 76, 153, 0.25)',
     'LPI 10K',
@@ -71,7 +90,7 @@ const lpiLayers = {
   ),
 
   25: createVectorLayer(
-    'Data/GeoJson/LPI_25K.geojson',
+    'GeoJson/LPI_25K.geojson',
     '#0066cc',
     'rgba(0, 102, 204, 0.25)',
     'LPI 25K',
@@ -79,7 +98,7 @@ const lpiLayers = {
   ),
 
   50: createVectorLayer(
-    'Data/GeoJson/LPI_50K.geojson',
+    'GeoJson/LPI_50K.geojson',
     '#3399ff',
     'rgba(51, 153, 255, 0.25)',
     'LPI 50K',
@@ -87,7 +106,7 @@ const lpiLayers = {
   ),
 
   250: createVectorLayer(
-    'Data/GeoJson/LPI_250K.geojson',
+    'GeoJson/LPI_250K.geojson',
     '#66b3ff',
     'rgba(102, 179, 255, 0.25)',
     'LPI 250K',
@@ -95,12 +114,13 @@ const lpiLayers = {
   )
 };
 
+
 /* ===============================
    LLN LAYERS
 ================================ */
 const llnLayers = {
   50: createVectorLayer(
-    'Data/GeoJson/LLN_50K.geojson',
+    'GeoJson/LLN_50K.geojson',
     '#7b3294',
     'rgba(123, 50, 148, 0.25)',
     'LLN 50K',
@@ -108,7 +128,7 @@ const llnLayers = {
   ),
 
   250: createVectorLayer(
-    'Data/GeoJson/LLN_250K.geojson',
+    'GeoJson/LLN_250K.geojson',
     '#984ea3',
     'rgba(152, 78, 163, 0.25)',
     'LLN 250K',
@@ -116,7 +136,7 @@ const llnLayers = {
   ),
 
   500: createVectorLayer(
-    'Data/GeoJson/LLN_500K.geojson',
+    'GeoJson/LLN_500K.geojson',
     '#c2a5cf',
     'rgba(194, 165, 207, 0.25)',
     'LLN 500K',
@@ -124,12 +144,13 @@ const llnLayers = {
   )
 };
 
+
 /* ===============================
-   BATIMETRI
+   BATIMETRI LAYERS
 ================================ */
 const batimetriLayers = [
   createVectorLayer(
-    'Data/GeoJson/Batimetri_2021.geojson',
+    'GeoJson/Batimetri_2021.geojson',
     '#1b9e77',
     'rgba(27, 158, 119, 0.25)',
     'Batimetri 2021',
@@ -137,7 +158,7 @@ const batimetriLayers = [
   ),
 
   createVectorLayer(
-    'Data/GeoJson/Batimetri_2022.geojson',
+    'GeoJson/Batimetri_2022.geojson',
     '#1b9e77',
     'rgba(27, 158, 119, 0.25)',
     'Batimetri 2022',
@@ -145,7 +166,7 @@ const batimetriLayers = [
   ),
 
   createVectorLayer(
-    'Data/GeoJson/Batimetri_2023.geojson',
+    'GeoJson/Batimetri_2023.geojson',
     '#1b9e77',
     'rgba(27, 158, 119, 0.25)',
     'Batimetri 2023',
@@ -153,7 +174,7 @@ const batimetriLayers = [
   ),
 
   createVectorLayer(
-    'Data/GeoJson/Batimetri_2024.geojson',
+    'GeoJson/Batimetri_2024.geojson',
     '#1b9e77',
     'rgba(27, 158, 119, 0.25)',
     'Batimetri 2024',
@@ -161,7 +182,7 @@ const batimetriLayers = [
   ),
 
   createVectorLayer(
-    'Data/GeoJson/Batimetri_2025.geojson',
+    'GeoJson/Batimetri_2025.geojson',
     '#1b9e77',
     'rgba(27, 158, 119, 0.25)',
     'Batimetri 2025',
@@ -169,12 +190,13 @@ const batimetriLayers = [
   )
 ];
 
+
 /* ===============================
-   LKI
+   LKI LAYERS
 ================================ */
 const lkiLayers = [
   createVectorLayer(
-    'Data/GeoJson/LKI_2019.geojson',
+    'GeoJson/LKI_2019.geojson',
     '#e6ab02',
     'rgba(230, 171, 2, 0.25)',
     'LKI 2019',
@@ -182,7 +204,7 @@ const lkiLayers = [
   ),
 
   createVectorLayer(
-    'Data/GeoJson/LKI_2022.geojson',
+    'GeoJson/LKI_2022.geojson',
     '#e6ab02',
     'rgba(230, 171, 2, 0.25)',
     'LKI 2022',
@@ -190,13 +212,13 @@ const lkiLayers = [
   )
 ];
 
+
 /* ===============================
-   GARPAN
-   Satu checkbox untuk Garpan 2020 dan Garpan 2025
+   GARPAN LAYERS
 ================================ */
 const garpanLayers = [
   createVectorLayer(
-    'Data/GeoJson/Garpan_2020.geojson',
+    'GeoJson/Garpan_2020.geojson',
     '#d95f02',
     'rgba(217, 95, 2, 0.25)',
     'Garpan 2020',
@@ -204,26 +226,13 @@ const garpanLayers = [
   ),
 
   createLineLayer(
-    'Data/GeoJson/Garpan_2025.geojson',
+    'GeoJson/Garpan_2025.geojson',
     '#ffff00',
     'Garpan 2025',
     'garpan'
   )
 ];
 
-/* ===============================
-   DEBUG SEMUA LAYER GARPAN
-================================ */
-garpanLayers.forEach(layer => {
-  layer.getSource().on('featuresloadend', function () {
-    console.log(layer.get('name') + ' loaded:', layer.getSource().getFeatures().length);
-    console.log('Extent ' + layer.get('name') + ':', layer.getSource().getExtent());
-  });
-
-  layer.getSource().on('featuresloaderror', function () {
-    console.error(layer.get('name') + ' gagal dimuat. Cek path/nama file.');
-  });
-});
 
 /* ===============================
    MAP
@@ -244,6 +253,7 @@ const map = new ol.Map({
   })
 });
 
+
 /* ===============================
    MENU FUNCTIONS
 ================================ */
@@ -253,25 +263,29 @@ function toggleMenu(id) {
 }
 
 function toggleLPI(scale, checked) {
-  lpiLayers[scale].setVisible(checked);
+  if (lpiLayers[scale]) {
+    lpiLayers[scale].setVisible(checked);
+  }
 }
 
 function toggleLLN(scale, checked) {
-  llnLayers[scale].setVisible(checked);
+  if (llnLayers[scale]) {
+    llnLayers[scale].setVisible(checked);
+  }
 }
 
 function toggleBatimetri(el) {
-  batimetriLayers.forEach(layer => layer.setVisible(el.checked));
+  batimetriLayers.forEach(layer => {
+    layer.setVisible(el.checked);
+  });
 }
 
 function toggleLKI(checked) {
-  lkiLayers.forEach(layer => layer.setVisible(checked));
+  lkiLayers.forEach(layer => {
+    layer.setVisible(checked);
+  });
 }
 
-/* ===============================
-   TOGGLE GARPAN
-   Menyalakan Garpan 2020 dan 2025 sekaligus
-================================ */
 function toggleGarpan(checked) {
   garpanLayers.forEach(layer => {
     layer.setVisible(checked);
@@ -304,6 +318,7 @@ function toggleGarpan(checked) {
   }
 }
 
+
 /* ===============================
    POPUP
 ================================ */
@@ -324,6 +339,7 @@ document.getElementById('popup-closer').onclick = () => {
   popup.style.display = 'none';
   return false;
 };
+
 
 /* ===============================
    CLICK EVENT UNTUK GEOJSON
