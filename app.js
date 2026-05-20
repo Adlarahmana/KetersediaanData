@@ -343,9 +343,11 @@ document.getElementById('popup-closer').onclick = () => {
 
 /* ===============================
    CLICK EVENT UNTUK GEOJSON
+   Info yang atributnya sama hanya muncul sekali
 ================================ */
 map.on('singleclick', function (evt) {
   const hits = [];
+  const uniqueInfo = new Set();
 
   map.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {
     if (!layer || !layer.getVisible()) return;
@@ -356,6 +358,7 @@ map.on('singleclick', function (evt) {
 
     let type = layerName;
     let html = '';
+    let uniqueKey = '';
 
     /* ===== LPI ===== */
     if (category === 'lpi') {
@@ -369,6 +372,8 @@ map.on('singleclick', function (evt) {
         <b>Referensi Datum</b>: ${p.DTH || '-'}<br>
         <b>Jenis Data</b>: Hasil survei oleh ${p.PLK || '-'}<br><br>
       `;
+
+      uniqueKey = `${category}|${layerName}|${p.NLP || '-'}|${p.SKL || p.SKALA || '-'}|${p.THN || p.Tahun || '-'}|${p.EDS || '-'}|${p.DTH || '-'}|${p.PLK || '-'}`;
     }
 
     /* ===== LLN ===== */
@@ -383,6 +388,8 @@ map.on('singleclick', function (evt) {
         <b>Referensi Datum</b>: ${p.DTH || '-'}<br>
         <b>Jenis Data</b>: Hasil survei oleh ${p.PLK || '-'}<br><br>
       `;
+
+      uniqueKey = `${category}|${layerName}|${p.NLP || '-'}|${p.SKL || p.SKALA || '-'}|${p.THN || p.Tahun || '-'}|${p.EDS || '-'}|${p.DTH || '-'}|${p.PLK || '-'}`;
     }
 
     /* ===== BATIMETRI ===== */
@@ -393,6 +400,8 @@ map.on('singleclick', function (evt) {
         <b>Hasil Survei Data Batimetri</b><br>
         Tahun: ${p.THN || p.Tahun || layerName.replace('Batimetri ', '') || '-'}<br><br>
       `;
+
+      uniqueKey = `${category}|${layerName}|${p.THN || p.Tahun || layerName.replace('Batimetri ', '') || '-'}`;
     }
 
     /* ===== LKI ===== */
@@ -403,6 +412,8 @@ map.on('singleclick', function (evt) {
         <b>Data LKI</b><br>
         Tahun: ${p.THN || p.Tahun || layerName.replace('LKI ', '') || '-'}<br><br>
       `;
+
+      uniqueKey = `${category}|${layerName}|${p.THN || p.Tahun || layerName.replace('LKI ', '') || '-'}`;
     }
 
     /* ===== GARPAN ===== */
@@ -413,7 +424,19 @@ map.on('singleclick', function (evt) {
         <b>Data Garis Pantai Skala Besar</b><br>
         Tahun: ${p.THN || p.Tahun || layerName.replace('Garpan ', '') || '-'}<br><br>
       `;
+
+      uniqueKey = `${category}|${layerName}|${p.THN || p.Tahun || layerName.replace('Garpan ', '') || '-'}`;
     }
+
+    else {
+      uniqueKey = `${category}|${layerName}|${JSON.stringify(p)}`;
+    }
+
+    if (uniqueInfo.has(uniqueKey)) {
+      return;
+    }
+
+    uniqueInfo.add(uniqueKey);
 
     hits.push({
       type: type,
