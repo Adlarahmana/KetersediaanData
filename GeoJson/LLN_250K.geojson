@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "LLN 250K",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "OBJECTID_1": 15, "OBJECTID": 15, "DTH": "WGS 1984", "EDS": "2017", "HCP": 0.0, "JNP": "LLN", "JDP": "P. DUA TIMUR", "KET": null, "LAT_LL": 0.0, "LAT_UR": 0.0, "LON_LL": 0.0, "LON_UR": 0.0, "NLP": "LLN 07-1115", "PNB": "BIG", "PRJ": "Transverse Mercator", "SKL": 250000, "SCP": 0.0, "STP": 0.0, "THN": null, "PLK": "PT. Inasa Sakha Kirana", "ST_SDG": null, "SB_SDG": null, "TE_SDG": null, "ST_LPI": null, "TE_LPI": null, "S_SDG": null, "REV": null, "TE1": null, "FDD": null, "SHAPE_Leng": 5.0, "Zona": 0.0, "Shape_Le_1": 5.0, "Shape_Area": 1.5, "Link_Data": null, "Jenis_Data": null }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 106.500000000000227, -1.0 ], [ 105.000000000000171, -1.0 ], [ 105.000000000000171, 0.000000000000227 ], [ 106.500000000000227, 0.000000000000227 ], [ 106.500000000000227, -1.0 ] ] ] ] } }
+]
+}
